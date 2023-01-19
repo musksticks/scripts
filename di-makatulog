@@ -1,0 +1,72 @@
+local librepo = "https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/"
+local UILib = loadstring(game:HttpGet(librepo..'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(librepo.."addons/ThemeManager.lua"))()
+local SaveManager = loadstring(game:HttpGet(librepo.."addons/SaveManager.lua"))()
+
+local winMain = UILib:CreateWindow("why do u care?")
+
+local Tabs = {main = winMain:AddTab('Main')}
+
+-- Variables
+local Player = game:GetService("Players").LocalPlayer or game:GetService("Players").PlayerAdded:Wait()
+
+-- Game List
+local games = {[10624667410]={"di makatulog"}}
+
+-- AutoClick
+local SpamReq = Tabs.main:AddLeftGroupbox("SpamReq")
+
+SpamReq:AddToggle("SpamReq", { Text = "Enabled", Default = false })
+    Toggles.SpamReq:OnChanged(function()
+        while Toggles.SpamReq.Value and task.wait() do
+            wait(0.1)
+            for _,v in pairs(game.Players:GetChildren()) do
+            local args = {[1] = "Ask",[2] = game:GetService("Players")[v.Name]}
+            game:GetService("ReplicatedStorage").Events.HugEvents:FireServer(unpack(args))
+            local args = {[1] = "Stop",[2] = game:GetService("Players")[v.Name]}
+            game:GetService("ReplicatedStorage").Events.HugEvents:FireServer(unpack(args))
+            end
+    end
+end)
+
+local ForcePickup = Tabs.main:AddLeftGroupbox("ForcePickup")
+
+ForcePickup:AddToggle("ForcePickup", { Text = "Enabled", Default = false })
+    Toggles.ForcePickup:OnChanged(function()
+        while Toggles.ForcePickup.Value and task.wait() do
+            wait(0.5)
+        for _,v in pairs(game.Players:GetChildren()) do
+        local args = {[1] = "Hug",[2] = game:GetService("Players")[v.Name]}
+        game:GetService("ReplicatedStorage").Events.HugEvents:FireServer(unpack(args))
+        end
+    end
+end)
+
+-- Run Script
+local place = games[game.PlaceId]
+if place then
+	UILib:SetWatermark("MUSK - "..place[1])
+	UILib:Notify(place[1])
+	print(pcall(place[2]))
+end
+
+-- Settings
+local settings = winMain:AddTab("Settings")
+local misc = settings:AddLeftGroupbox("Misc.")
+misc:AddButton("Unload",function() UILib:Unload() end)
+misc:AddButton("Rejoin",function() game:GetService("TeleportService"):Teleport(game.PlaceId,game.Players.LocalPlayer) end)
+misc:AddToggle('Watermark',{Text="Show watermark",Default=true}):OnChanged(function() UILib:SetWatermarkVisibility(Toggles.Watermark.Value) end)
+
+local theme = settings:AddLeftGroupbox("Theme")
+
+-- managers
+ThemeManager:SetLibrary(UILib)
+SaveManager:SetLibrary(UILib)
+
+SaveManager:IgnoreThemeSettings() 
+
+ThemeManager:SetFolder("Musk")
+SaveManager:SetFolder("Musk/"..place[1])
+
+SaveManager:BuildConfigSection(settings) 
+ThemeManager:ApplyToGroupbox(theme)
