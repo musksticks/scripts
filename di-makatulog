@@ -13,7 +13,7 @@ local Player = game:GetService("Players").LocalPlayer or game:GetService("Player
 -- Game List
 local games = {[10624667410]={"di makatulog"}}
 
--- AutoClick
+-- goofy ah request
 local SpamReq = Tabs.main:AddLeftGroupbox("SpamReq")
 
 SpamReq:AddToggle("SpamReq", { Text = "Enabled", Default = false })
