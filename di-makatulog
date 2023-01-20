@@ -11,9 +11,9 @@ local Tabs = {main = winMain:AddTab('Main')}
 local Player = game:GetService("Players").LocalPlayer or game:GetService("Players").PlayerAdded:Wait()
 
 -- Game List
-local games = {[10624667410]={"di makatulog"}}
+local games = {[10624667410]={"di makatulog"}, [9181090030]={"Pinoy RP HangOut"}, [10736168592]={"Club"}}
 
--- goofy ah request
+-- AutoClick
 local SpamReq = Tabs.main:AddLeftGroupbox("SpamReq")
 
 SpamReq:AddToggle("SpamReq", { Text = "Enabled", Default = false })
@@ -40,6 +40,13 @@ ForcePickup:AddToggle("ForcePickup", { Text = "Enabled", Default = false })
         game:GetService("ReplicatedStorage").Events.HugEvents:FireServer(unpack(args))
         end
     end
+end)
+
+-- Teleport
+local Teleport = Tabs.main:AddLeftGroupbox('Teleport')
+
+Teleport:AddButton('TP to Club game', function()
+    game:GetService("TeleportService"):Teleport(10736168592,game:GetService("Players").LocalPlayer)
 end)
 
 -- Run Script
