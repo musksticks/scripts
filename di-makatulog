@@ -42,6 +42,14 @@ ForcePickup:AddToggle("ForcePickup", { Text = "Enabled", Default = false })
     end
 end)
 
+-- removeGUI
+local Remove = Tabs.main:AddLeftGroupbox('Remove')
+
+Remove:AddButton('Hide name GUI', function()
+    local user = game:GetService("Players").LocalPlayer.Name
+    game:GetService("Workspace")[user].HumanoidRootPart.OverheadGui:Remove()
+end)
+
 -- Teleport
 local Teleport = Tabs.main:AddLeftGroupbox('Teleport')
 
