@@ -1,0 +1,5 @@
+if game.PlaceId==6106827526 then -- vibe bridge
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Musksticks/scripts/main/vibe-bridge"))()
+elseif game.PlaceId==10624667410 then -- di makatulog
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Musksticks/scripts/main/di-makatulog"))()
+end
